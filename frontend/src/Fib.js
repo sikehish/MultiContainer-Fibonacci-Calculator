@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default Fib = () => {
+const Fib = () => {
   const [indexes, setIndexes] = useState([]);
   const [values, setValues] = useState([]);
   const [index, setIndex] = useState("");
@@ -67,3 +67,5 @@ export default Fib = () => {
     </div>
   );
 };
+
+export default Fib;
