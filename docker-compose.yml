@@ -11,3 +11,5 @@ services:
     volumes:
       - /app/node_modules
       - ./server:/app
+    environment:
+      - REDIS_HOST=redis
