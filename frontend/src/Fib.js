@@ -4,6 +4,7 @@ const Fib = () => {
   const [indexes, setIndexes] = useState([]);
   const [values, setValues] = useState([]);
   const [index, setIndex] = useState("");
+  const [entry, setEntries] = useState([]);
 
   useEffect(() => {
     async function func1() {
@@ -21,19 +22,23 @@ const Fib = () => {
     }
 
     func2();
-  });
+  }, []);
 
-  function renderVals() {
-    const entries = [];
-    for (const key in values) {
-      entries.push(
-        <div key={key}>
-          For index {key} Fibonacci value is {values[key]}
-        </div>
-      );
+  useEffect(() => {
+    function renderVals() {
+      const entries = [];
+      for (const key in values) {
+        entries.push(
+          <div key={key}>
+            For index {key} Fibonacci value is {values[key]}
+          </div>
+        );
+      }
+      setEntries(entries);
     }
-    return entries;
-  }
+
+    renderVals();
+  }, [values]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +65,9 @@ const Fib = () => {
       </form>
 
       <h3>Indexes computed:</h3>
-      {indexes.map(({ number }) => number).join(",")}
+      {indexes &&
+        indexes.length > 0 &&
+        indexes.map(({ number }) => number).join(",")}
 
       <h3>Calculated values:</h3>
       {renderVals()}
