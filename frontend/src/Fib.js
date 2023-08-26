@@ -13,7 +13,7 @@ const Fib = () => {
     }
 
     func1();
-  });
+  }, []);
 
   useEffect(() => {
     async function func2() {
@@ -24,21 +24,21 @@ const Fib = () => {
     func2();
   }, []);
 
-  useEffect(() => {
-    function renderVals() {
-      const entries = [];
-      for (const key in values) {
-        entries.push(
-          <div key={key}>
-            For index {key} Fibonacci value is {values[key]}
-          </div>
-        );
-      }
-      setEntries(entries);
-    }
+  // useEffect(() => {
+  //   function renderVals() {
+  //     const entries = [];
+  //     for (const key in values) {
+  //       entries.push(
+  // <div key={key}>
+  //   For index {key} Fibonacci value is {values[key]}
+  // </div>
+  //       );
+  //     }
+  //     setEntries(entries);
+  //   }
 
-    renderVals();
-  }, [values]);
+  //   renderVals();
+  // }, [values]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +70,11 @@ const Fib = () => {
         indexes.map(({ number }) => number).join(",")}
 
       <h3>Calculated values:</h3>
-      {renderVals()}
+      {Object.keys(values).map((key) => (
+        <div key={key}>
+          For index {key} Fibonacci value is {values[key]}
+        </div>
+      ))}
     </div>
   );
 };
