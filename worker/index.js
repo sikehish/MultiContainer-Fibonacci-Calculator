@@ -10,12 +10,14 @@ const redisClient = redis.createClient({
   retry_strategy: () => 1000, //The function should return a number, which will be the amount of time in milliseconds to wait before retrying the connection. If the function returns null or undefined, the client will not retry the connection.
 });
 
+const sub = redisClient.duplicate();
+
 function fib(index) {
-  if (index < 2) return index;
+  if (index < 2) return 1;
   return fib(index - 1) + fib(index - 2);
 }
-redisClient.subscribe("insert");
 
-redisClient.on("message", (channel, message) => {
-  redisClient.hSet("values", message, fib(parseInt(message)));
+sub.on("message", (channel, message) => {
+  redisClient.hset("values", message, fib(parseInt(message)));
 });
+sub.subscribe("insert");
