@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 
 const Fib = () => {
   const [indexes, setIndexes] = useState([]);
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState({});
   const [index, setIndex] = useState("");
   const [entry, setEntries] = useState([]);
 
   useEffect(() => {
     async function func1() {
-      const values = await fetch("/api/values/current");
-      setValues(values);
+      const res = await fetch("/api/values/current");
+      const vals = await res.json();
+      setValues(vals);
+      // console.log(vals);
     }
 
     func1();
@@ -17,8 +19,10 @@ const Fib = () => {
 
   useEffect(() => {
     async function func2() {
-      const seenIndexes = await fetch("/api/values/all");
-      setIndexes(seenIndexes);
+      const res = await fetch("/api/values/all");
+      const inds = await res.json();
+      setIndexes(inds);
+      // console.log(inds);
     }
 
     func2();
