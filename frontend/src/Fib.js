@@ -7,26 +7,31 @@ const Fib = () => {
   const [entry, setEntries] = useState([]);
 
   useEffect(() => {
-    async function func1() {
-      const res = await fetch("/api/values/current");
-      const vals = await res.json();
-      setValues(vals);
+    function func1() {
+      if (index === "") {
+        fetch("/api/values/current")
+          .then((res) => res.json())
+          .then((vals) => setValues(vals))
+          .catch((err) => console.log(err));
+      }
       // console.log(vals);
     }
 
     func1();
-  }, []);
+  }, [index]);
 
   useEffect(() => {
-    async function func2() {
-      const res = await fetch("/api/values/all");
-      const inds = await res.json();
-      setIndexes(inds);
-      // console.log(inds);
+    function func2() {
+      if (index === "") {
+        fetch("/api/values/all")
+          .then((res) => res.json())
+          .then((inds) => setIndexes(inds))
+          .catch((err) => console.log(err));
+      }
     }
 
     func2();
-  }, []);
+  }, [index]);
 
   // useEffect(() => {
   //   function renderVals() {
