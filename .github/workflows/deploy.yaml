@@ -13,10 +13,10 @@ jobs:
       - run: docker build -t sikehish/react-test -f ./frontend/Dockerfile.dev ./frontend
       - run: docker run -e CI=true sikehish/react-test npm test
       
+      - run: docker build -t sikehish/multi-frontend ./frontend
       - run: docker build -t sikehish/multi-nginx ./nginx
       - run: docker build -t sikehish/multi-server ./server
       - run: docker build -t sikehish/multi-worker ./worker
-      - run: docker build -t sikehish/multi-frontend ./frontend
 
       - run: docker push sikehish/multi-frontend
       - run: docker push sikehish/multi-nginx
