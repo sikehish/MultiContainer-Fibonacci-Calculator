@@ -18,7 +18,7 @@ services:
       - PGPORT=$PGPORT
   worker:
     image: 'sikehish/multi-worker'
-    mem_limit: 128m
+    mem_limit: 128m 
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
