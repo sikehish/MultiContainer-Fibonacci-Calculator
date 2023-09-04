@@ -1,9 +1,9 @@
 version: '3'
 services:
-  client:
+  frontend:
     image: 'sikehish/multi-frontend'
     mem_limit: 128m
-    hostname: client
+    hostname: frontend
   server:
     image: 'sikehish/multi-server'
     mem_limit: 128m
